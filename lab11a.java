@@ -1,4 +1,3 @@
-
 import java.sql.*;
 import java.io.*;
 import java.util.*;
@@ -19,15 +18,15 @@ public class lab11a {
             Connection con = DriverManager.getConnection(url);
             System.out.println("Database connection successful.");
 
-            // Create Student table if it does not exist
+            // Check Student table
             DatabaseMetaData meta = con.getMetaData();
-            boolean tableExists = false;
+            ResultSet rs = meta.getTables(
+                null, null, "Student", new String[]{"TABLE"});
 
-            try (ResultSet rs = meta.getTables(
-                    null, null, "Student", new String[]{"TABLE"})) {
-                tableExists = rs.next();
-            }
+            boolean tableExists = rs.next();
+            rs.close();
 
+            // Create table if it does not exist
             if (!tableExists) {
                 Statement st = con.createStatement();
 
@@ -59,8 +58,8 @@ public class lab11a {
 
                 System.out.println("Error: All fields are required!");
 
-            } else if (!email.matches(
-                "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
+            } else if (!email.contains("@") ||
+                       !email.contains(".")) {
 
                 System.out.println("Error: Invalid email address!");
 
@@ -69,6 +68,7 @@ public class lab11a {
                 System.out.println("Error: Phone must contain digits only!");
 
             } else {
+
                 String sql =
                     "INSERT INTO Student ([Name], Email, Phone) " +
                     "VALUES (?, ?, ?)";
@@ -90,15 +90,15 @@ public class lab11a {
             con.close();
 
         } catch (ClassNotFoundException e) {
-            System.out.println("Error: JDBC driver not found!");
+            System.out.println("JDBC driver not found!");
 
         } catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
-
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
         }
 
         sc.close();
     }
 }
+
+// javac -cp ".;ucanaccess-5.1.8-uber.jar" lab11a.java
+// java -cp ".;ucanaccess-5.1.8-uber.jar" lab11a
