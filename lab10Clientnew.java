@@ -43,12 +43,8 @@ public class lab10Clientnew {
 
             System.out.println("Server response: " + response);
 
-        } catch (PortUnreachableException e) {
-            System.out.println("Error: Server is not reachable!");
-
         } catch (IOException e) {
-            System.out.println(
-                "Error: Unable to communicate with server!");
+            e.printStackTrace();
         }
     }
 }

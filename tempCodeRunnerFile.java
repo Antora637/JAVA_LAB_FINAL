@@ -1,1 +1,1 @@
-javac -cp ".;lib/*" CreateAccessDB.java
+ Thread.currentThread().interrupt();

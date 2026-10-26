@@ -16,9 +16,9 @@ public class lab9Clientnew {
                      new OutputStreamWriter(socket.getOutputStream()));
              Scanner sc = new Scanner(System.in)) {
 
-            // System.out.print("Enter a message: ");
-            // String message = sc.nextLine();
-            String message = "a".repeat(1100);
+            System.out.print("Enter a message: ");
+            String message = sc.nextLine();
+            // String message = "a".repeat(1100);
 
             // Check message size
             if (message.getBytes().length > 1024) {

@@ -50,3 +50,6 @@ public class lab11b {
         }
     }
 }
+
+// javac -cp ".;ucanaccess-5.1.8-uber.jar" lab11b.java
+// java -cp ".;ucanaccess-5.1.8-uber.jar" lab11b
